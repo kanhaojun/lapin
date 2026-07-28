@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Train a mask-conditioned DDPM for synthetic medical image generation."""
+"""Train a mask-conditioned DDPM for synthetic industrial image generation."""
 
 import argparse
 import copy

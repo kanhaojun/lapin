@@ -14,12 +14,13 @@ from utils import (
 )
 
 DATASET_PATHS = {
-    'isic18': {'data_path': './data/isic2018/'},
-    'isic17': {'data_path': './data/isic2017/'},
+    'sd900': {'data_path': './data/sdsaliency900/'},
     'sd900combine': {
         'data_path': './data/sdsaliency900/',
         'data_path_aux': './data/sd900_syn_all_local_relay_diff/',
     },
+    'isic18': {'data_path': './data/isic2018/'},
+    'isic17': {'data_path': './data/isic2017/'},
 }
 
 OPTIMIZER_DEFAULTS = {
@@ -38,7 +39,7 @@ OPTIMIZER_DEFAULTS = {
 
 def build_config(
     network='unet',
-    dataset='isic18',
+    dataset='sd900',
     mode='centralized',
     fed_method='fedavg',
     gpu_id='0',

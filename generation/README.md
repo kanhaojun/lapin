@@ -1,6 +1,6 @@
 # Mask-Conditioned DDPM Generation
 
-This module trains a **mask-conditioned Denoising Diffusion Probabilistic Model (DDPM)** to synthesize medical images for downstream segmentation experiments.
+This module trains a **mask-conditioned Denoising Diffusion Probabilistic Model (DDPM)** to synthesize industrial surface images for downstream defect-segmentation experiments.
 
 ## Overview
 
@@ -30,10 +30,10 @@ path/to/masks/
     img_002.png
 ```
 
-For ISIC-style data, you can prepare folders like:
+For SD900-style industrial data, you can prepare folders like:
 
 ```
-data/isic2018_gen/
+data/sd900_gen/
   images/0/ ...
   masks/0/ ...
 ```
@@ -46,9 +46,9 @@ Run from the **project root**:
 
 ```bash
 python -m generation.train \
-  --run-name isic18_ddpm \
-  --image-path data/isic2018_gen/images \
-  --mask-path data/isic2018_gen/masks \
+  --run-name sd900_ddpm \
+  --image-path data/sd900_gen/images \
+  --mask-path data/sd900_gen/masks \
   --num-classes 2 \
   --batch-size 4 \
   --image-size 256 \
@@ -64,9 +64,9 @@ Generate synthetic image-mask pairs from trained checkpoints:
 
 ```bash
 python -m generation.sample \
-  --run-name isic18_ddpm \
-  --mask-path data/isic2018/val/masks \
-  --output data/synthetic/isic18_ddpm \
+  --run-name sd900_ddpm \
+  --mask-path data/sdsaliency900/val/masks \
+  --output data/synthetic/sd900_ddpm \
   --num-classes 2 \
   --batch-size 4 \
   --image-size 256 \
@@ -77,7 +77,7 @@ python -m generation.sample \
 Output structure:
 
 ```
-data/synthetic/isic18_ddpm/
+data/synthetic/sd900_ddpm/
   0_0/
     0_0_img.png
     0_0_mask.png
@@ -117,7 +117,7 @@ python -m generation.resize_images input_dir output_dir --size 256
 Typical workflow:
 
 ```
-Real images + masks
+Real surface images + defect masks
         ↓
   generation.train
         ↓

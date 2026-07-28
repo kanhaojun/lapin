@@ -1,6 +1,6 @@
 # Lapin
 
-Lapin 是一個用於**醫學影像分割**的研究框架，同時支援**集中式訓練**與**聯邦學習（Federated Learning）**。此外，本專案包含**遮罩條件式 DDPM** 模組，可在分割前先以生成模型合成大量訓練資料。統一的程式碼結構可在 ISIC 2017/2018 等皮膚病灶資料集上，訓練、驗證並比較多種分割模型。
+Lapin 是一個用於**工業影像分割**的研究框架，同時支援**集中式訓練**與**聯邦學習（Federated Learning）**。此外，本專案包含**遮罩條件式 DDPM** 模組，可在分割前先以生成模型合成大量訓練資料。統一的程式碼結構可在 SD900（Saliency900）等工業表面瑕疵資料集上，訓練、驗證並比較多種分割模型。
 
 ## 主要特色
 
@@ -73,12 +73,12 @@ pip install mamba_ssm==1.0.1
 
 ## 資料集準備
 
-請將 ISIC 資料集放置於 `data/` 目錄，格式說明見 [data/README.md](data/README.md)。
+請將 SD900 工業瑕疵資料集放置於 `data/` 目錄，格式說明見 [data/README.md](data/README.md)。
 
 範例結構：
 
 ```
-data/isic2018/
+data/sdsaliency900/
   train/images/
   train/masks/
   val/images/
@@ -90,9 +90,9 @@ data/isic2018/
 在完整資料集上訓練模型：
 
 ```bash
-python train.py --model unet --dataset isic18 --gpu 0 --epochs 300
-python train.py --model vmunet --dataset isic18 --gpu 0 --epochs 300 --wandb
-python train.py --model hvmunet --dataset isic17 --gpu 0 --batch-size 2
+python train.py --model unet --dataset sd900 --gpu 0 --epochs 300
+python train.py --model vmunet --dataset sd900 --gpu 0 --epochs 300 --wandb
+python train.py --model hvmunet --dataset sd900 --gpu 0 --batch-size 2
 ```
 
 主要參數：
@@ -100,7 +100,7 @@ python train.py --model hvmunet --dataset isic17 --gpu 0 --batch-size 2
 | 參數 | 說明 | 預設值 |
 |------|------|--------|
 | `--model` | 模型名稱 | `unet` |
-| `--dataset` | `isic18` 或 `isic17` | `isic18` |
+| `--dataset` | `sd900` | `sd900` |
 | `--gpu` | GPU 編號 | `0` |
 | `--epochs` | 訓練輪數 | `300` |
 | `--batch-size` | 批次大小 | 依模型預設 |
@@ -116,36 +116,36 @@ python train.py --model hvmunet --dataset isic17 --gpu 0 --batch-size 2
 ```bash
 # 1. 以配對影像與遮罩訓練 DDPM
 python -m generation.train \
-  --run-name isic18_ddpm \
-  --image-path data/isic2018_gen/images \
-  --mask-path data/isic2018_gen/masks \
+  --run-name sd900_ddpm \
+  --image-path data/sd900_gen/images \
+  --mask-path data/sd900_gen/masks \
   --num-classes 2 --batch-size 4 --image-size 256 --gpu 0
 
 # 2. 採樣合成影像-遮罩對
 python -m generation.sample \
-  --run-name isic18_ddpm \
-  --mask-path data/isic2018/val/masks \
-  --output data/synthetic/isic18_ddpm \
+  --run-name sd900_ddpm \
+  --mask-path data/sdsaliency900/val/masks \
+  --output data/synthetic/sd900_ddpm \
   --num-classes 2 --batch-size 4 --gpu 0
 
 # 3. （可選）評估生成品質
-python -m generation.eval_fid data/isic2018/val/images data/synthetic/isic18_ddpm/0_0
+python -m generation.eval_fid data/sdsaliency900/val/images data/synthetic/sd900_ddpm/0_0
 ```
 
 典型流程：**生成合成資料 → 合併至 `data/` → 執行分割訓練**。
 
 ## 聯邦學習訓練
 
-以模擬多客戶端方式進行分散式訓練：
+以模擬多工廠客戶端方式進行分散式訓練：
 
 ```bash
-# ISIC18 上的 FedAvg
-python train_federated.py --model unet --dataset isic18 --method fedavg --gpu 0
+# SD900 上的 FedAvg
+python train_federated.py --model unet --dataset sd900combine --method fedavg --gpu 0
 
 # FedProx，IID 資料切分
-python train_federated.py --model unet --dataset isic18 --method fedprox --iid --gpu 0
+python train_federated.py --model unet --dataset sd900combine --method fedprox --iid --gpu 0
 
-# SCAFFOLD，工業場景合併資料集
+# SCAFFOLD，真實與合成工業資料合併
 python train_federated.py --model unet --dataset sd900combine --method scaffold --num-clients 23 --gpu 0
 ```
 
@@ -183,7 +183,7 @@ python train_federated.py --model unet --dataset sd900combine --method scaffold 
 
 ```bibtex
 @software{lapin2026,
-  title  = {Lapin: A Unified Framework for Medical Image Segmentation},
+  title  = {Lapin: A Unified Framework for Industrial Image Segmentation},
   author = {Your Name},
   year   = {2026},
   url    = {https://github.com/your-org/lapin}

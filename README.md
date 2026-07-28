@@ -1,6 +1,6 @@
 # Lapin
 
-Lapin is a research framework for **medical image segmentation** with both **centralized** and **federated** training pipelines. It also includes a **mask-conditioned DDPM** module for synthesizing training data before segmentation. The unified codebase supports training, validation, and comparison of multiple segmentation architectures on dermatology datasets such as ISIC 2017/2018.
+Lapin is a research framework for **industrial image segmentation** with both **centralized** and **federated** training pipelines. It also includes a **mask-conditioned DDPM** module for synthesizing training data before segmentation. The unified codebase supports training, validation, and comparison of multiple segmentation architectures on industrial surface-defect datasets such as SD900 (Saliency900).
 
 ## Highlights
 
@@ -73,12 +73,12 @@ See `pretrained/README.md` for required checkpoint files.
 
 ## Dataset Preparation
 
-Download ISIC datasets and place them under `data/` as described in [data/README.md](data/README.md).
+Download or prepare the SD900 industrial defect dataset and place it under `data/` as described in [data/README.md](data/README.md).
 
 Example layout:
 
 ```
-data/isic2018/
+data/sdsaliency900/
   train/images/
   train/masks/
   val/images/
@@ -90,9 +90,9 @@ data/isic2018/
 Train a model on the full dataset:
 
 ```bash
-python train.py --model unet --dataset isic18 --gpu 0 --epochs 300
-python train.py --model vmunet --dataset isic18 --gpu 0 --epochs 300 --wandb
-python train.py --model hvmunet --dataset isic17 --gpu 0 --batch-size 2
+python train.py --model unet --dataset sd900 --gpu 0 --epochs 300
+python train.py --model vmunet --dataset sd900 --gpu 0 --epochs 300 --wandb
+python train.py --model hvmunet --dataset sd900 --gpu 0 --batch-size 2
 ```
 
 Arguments:
@@ -100,7 +100,7 @@ Arguments:
 | Argument | Description | Default |
 |----------|-------------|---------|
 | `--model` | Architecture key | `unet` |
-| `--dataset` | `isic18` or `isic17` | `isic18` |
+| `--dataset` | `sd900` | `sd900` |
 | `--gpu` | CUDA device id | `0` |
 | `--epochs` | Training epochs | `300` |
 | `--batch-size` | Batch size | model default |
@@ -116,36 +116,36 @@ Before segmentation training, you can augment datasets with a mask-conditioned D
 ```bash
 # 1. Train DDPM on paired images and masks
 python -m generation.train \
-  --run-name isic18_ddpm \
-  --image-path data/isic2018_gen/images \
-  --mask-path data/isic2018_gen/masks \
+  --run-name sd900_ddpm \
+  --image-path data/sd900_gen/images \
+  --mask-path data/sd900_gen/masks \
   --num-classes 2 --batch-size 4 --image-size 256 --gpu 0
 
 # 2. Sample synthetic image-mask pairs
 python -m generation.sample \
-  --run-name isic18_ddpm \
-  --mask-path data/isic2018/val/masks \
-  --output data/synthetic/isic18_ddpm \
+  --run-name sd900_ddpm \
+  --mask-path data/sdsaliency900/val/masks \
+  --output data/synthetic/sd900_ddpm \
   --num-classes 2 --batch-size 4 --gpu 0
 
 # 3. (Optional) Evaluate generation quality
-python -m generation.eval_fid data/isic2018/val/images data/synthetic/isic18_ddpm/0_0
+python -m generation.eval_fid data/sdsaliency900/val/images data/synthetic/sd900_ddpm/0_0
 ```
 
 Typical pipeline: **generate synthetic data → merge into `data/` → run segmentation training**.
 
 ## Federated Training
 
-Train across simulated clients with FedAvg, FedProx, or SCAFFOLD:
+Train across simulated factory clients with FedAvg, FedProx, or SCAFFOLD:
 
 ```bash
-# FedAvg on ISIC18
-python train_federated.py --model unet --dataset isic18 --method fedavg --gpu 0
+# FedAvg on SD900
+python train_federated.py --model unet --dataset sd900combine --method fedavg --gpu 0
 
 # FedProx with non-IID split
-python train_federated.py --model unet --dataset isic18 --method fedprox --iid --gpu 0
+python train_federated.py --model unet --dataset sd900combine --method fedprox --iid --gpu 0
 
-# SCAFFOLD with combined industrial dataset
+# SCAFFOLD with combined real and synthetic industrial data
 python train_federated.py --model unet --dataset sd900combine --method scaffold --num-clients 23 --gpu 0
 ```
 
@@ -183,7 +183,7 @@ If you use Lapin in your research, please cite:
 
 ```bibtex
 @software{lapin2026,
-  title  = {Lapin: A Unified Framework for Medical Image Segmentation},
+  title  = {Lapin: A Unified Framework for Industrial Image Segmentation},
   author = {Your Name},
   year   = {2026},
   url    = {https://github.com/your-org/lapin}

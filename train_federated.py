@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Federated learning entry point for medical image segmentation."""
+"""Federated learning entry point for industrial image segmentation."""
 
 import argparse
 import copy
@@ -34,7 +34,7 @@ from utils import (
 warnings.filterwarnings('ignore')
 
 SUPPORTED_MODELS = ['unet', 'vmunet', 'vmunet-v2', 'hvmunet']
-SUPPORTED_DATASETS = ['isic18', 'isic17', 'sd900combine']
+SUPPORTED_DATASETS = ['sd900', 'sd900combine', 'isic18', 'isic17']
 SUPPORTED_METHODS = ['fedavg', 'fedprox', 'scaffold']
 
 
@@ -43,7 +43,7 @@ def parse_args():
         description='Train a segmentation model with federated learning.',
     )
     parser.add_argument('--model', default='unet', choices=SUPPORTED_MODELS)
-    parser.add_argument('--dataset', default='isic18', choices=SUPPORTED_DATASETS)
+    parser.add_argument('--dataset', default='sd900combine', choices=SUPPORTED_DATASETS)
     parser.add_argument('--method', default='fedavg', choices=SUPPORTED_METHODS)
     parser.add_argument('--gpu', default='0')
     parser.add_argument('--epochs', type=int, default=300)

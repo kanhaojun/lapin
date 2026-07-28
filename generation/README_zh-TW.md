@@ -1,6 +1,6 @@
 # 遮罩條件式 DDPM 資料生成
 
-本模組訓練 **遮罩條件式 DDPM（Denoising Diffusion Probabilistic Model）**，用於生成醫學影像，供下游分割實驗擴增資料。
+本模組訓練 **遮罩條件式 DDPM（Denoising Diffusion Probabilistic Model）**，用於生成工業表面影像，供下游瑕疵分割實驗擴增資料。
 
 ## 流程概覽
 
@@ -28,10 +28,10 @@ path/to/masks/
     img_002.png
 ```
 
-ISIC 資料可整理為：
+SD900 工業資料可整理為：
 
 ```
-data/isic2018_gen/
+data/sd900_gen/
   images/0/ ...
   masks/0/ ...
 ```
@@ -44,9 +44,9 @@ data/isic2018_gen/
 
 ```bash
 python -m generation.train \
-  --run-name isic18_ddpm \
-  --image-path data/isic2018_gen/images \
-  --mask-path data/isic2018_gen/masks \
+  --run-name sd900_ddpm \
+  --image-path data/sd900_gen/images \
+  --mask-path data/sd900_gen/masks \
   --num-classes 2 \
   --batch-size 4 \
   --image-size 256 \
@@ -62,9 +62,9 @@ Checkpoint 儲存於 `generation/checkpoints/<run-name>/`。
 
 ```bash
 python -m generation.sample \
-  --run-name isic18_ddpm \
-  --mask-path data/isic2018/val/masks \
-  --output data/synthetic/isic18_ddpm \
+  --run-name sd900_ddpm \
+  --mask-path data/sdsaliency900/val/masks \
+  --output data/synthetic/sd900_ddpm \
   --num-classes 2 \
   --batch-size 4 \
   --image-size 256 \
@@ -75,7 +75,7 @@ python -m generation.sample \
 輸出結構：
 
 ```
-data/synthetic/isic18_ddpm/
+data/synthetic/sd900_ddpm/
   0_0/
     0_0_img.png
     0_0_mask.png
@@ -115,7 +115,7 @@ python -m generation.resize_images input_dir output_dir --size 256
 典型工作流程：
 
 ```
-真實影像 + 遮罩
+真實表面影像 + 瑕疵遮罩
         ↓
   generation.train
         ↓
@@ -124,7 +124,7 @@ python -m generation.resize_images input_dir output_dir --size 256
   合併至 data/       →  train.py / train_federated.py
 ```
 
-聯邦實驗中，合成資料常與各客戶端真實資料合併，例如放在 `data/sd900_syn_all_local_relay_diff/`。
+聯邦實驗中，合成資料常與各工廠客戶端真實資料合併，例如放在 `data/sd900_syn_all_local_relay_diff/`。
 
 ## 檔案說明
 

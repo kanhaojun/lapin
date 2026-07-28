@@ -1,11 +1,13 @@
 # Dataset layout
 
-Place downloaded datasets under `data/` using the following structure.
+Place downloaded or prepared datasets under `data/` using the following structure.
 
-## ISIC 2017 / ISIC 2018
+## SD900 (Saliency900) — Industrial Surface Defect
+
+Primary dataset for industrial surface-defect segmentation:
 
 ```
-data/isic2018/
+data/sdsaliency900/
   train/
     images/
       *.png
@@ -18,11 +20,11 @@ data/isic2018/
       *.png
 ```
 
-The same layout applies to `data/isic2017/`.
+Each image is a product-surface capture; masks annotate defect regions (e.g. scratches, stains, dents).
 
 ## Federated industrial dataset (optional)
 
-For federated experiments with combined real and synthetic data:
+For federated experiments with combined real and synthetic data across multiple factory clients:
 
 ```
 data/sdsaliency900/
@@ -38,10 +40,12 @@ data/sd900_syn_all_local_relay_diff/
   val/masks/
 ```
 
-## Download
+Use `--dataset sd900combine` in `train_federated.py` to merge both sources.
 
-- ISIC challenge data: https://challenge.isic-archive.com/data
-- Preprocessed ISIC17/ISIC18 splits (7:3) are commonly shared by segmentation benchmark releases.
+## Download / preparation
+
+- SD900 (Saliency900): prepare from your industrial inspection pipeline or internal defect-annotation release.
+- Typical train/val split ratio is 7:3; ensure image and mask filenames match between `images/` and `masks/` folders.
 
 After placing the files, verify that image and mask filenames match between the `images/` and `masks/` folders.
 
@@ -50,7 +54,7 @@ After placing the files, verify that image and mask filenames match between the 
 The `generation/` module produces synthetic image-mask pairs via a mask-conditioned DDPM. Typical layout for **training the generator**:
 
 ```
-data/isic2018_gen/
+data/sd900_gen/
   images/
     0/
       *.png

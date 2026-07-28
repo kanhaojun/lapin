@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Centralized training entry point for medical image segmentation."""
+"""Centralized training entry point for industrial image segmentation."""
 
 import argparse
 import os
@@ -29,7 +29,7 @@ SUPPORTED_MODELS = [
     'unet', 'vmunet', 'vmunet-v2', 'hvmunet', 'u2net', 'unetpp', 'unetppp',
     'tunet', 'resunet', 'resunetpp', 'attu', 'r2u', 'attr2u',
 ]
-SUPPORTED_DATASETS = ['isic18', 'isic17']
+SUPPORTED_DATASETS = ['sd900', 'isic18', 'isic17']
 
 
 def parse_args():
@@ -37,7 +37,7 @@ def parse_args():
         description='Train a segmentation model on a centralized dataset.',
     )
     parser.add_argument('--model', default='unet', choices=SUPPORTED_MODELS)
-    parser.add_argument('--dataset', default='isic18', choices=SUPPORTED_DATASETS)
+    parser.add_argument('--dataset', default='sd900', choices=SUPPORTED_DATASETS)
     parser.add_argument('--gpu', default='0')
     parser.add_argument('--epochs', type=int, default=300)
     parser.add_argument('--batch-size', type=int, default=None)
