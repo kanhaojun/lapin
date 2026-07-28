@@ -1,0 +1,22 @@
+matplotlib==3.7.1
+numpy==1.24.3
+scikit-learn==1.2.2
+torch==2.0.1
+torchvision==0.15.2
+tensorboardX
+timm==0.4.12
+tqdm
+Pillow
+thop
+medpy
+SimpleITK
+scikit-image
+h5py
+yacs
+termcolor
+opencv-python
+tqdm
+
+# Optional: generation quality evaluation
+# pytorch-fid
+# scipy==1.11.1

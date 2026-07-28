@@ -216,3 +216,20 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project outputs
+results/
+logs/
+wandb/
+
+# Generation outputs
+generation/checkpoints/
+generation/outputs/
+data/synthetic/
+pretrained/*.pth
+pretrained/*.npz
+pretrained/**/*.npz
+data/**/images/
+data/**/masks/
+!data/README.md
+!pretrained/README.md
