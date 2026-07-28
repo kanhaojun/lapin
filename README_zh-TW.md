@@ -177,17 +177,4 @@ python train_federated.py --model unet --dataset sd900combine --method scaffold 
 
 請參閱 [LICENSE](LICENSE)。
 
-## 引用
-
-若您在研究中使用了 Lapin，請引用：
-
-```bibtex
-@software{lapin2026,
-  title  = {Lapin: A Unified Framework for Industrial Image Segmentation},
-  author = {Your Name},
-  year   = {2026},
-  url    = {https://github.com/your-org/lapin}
-}
-```
-
 English documentation: [README.md](README.md)
