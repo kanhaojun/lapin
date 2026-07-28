@@ -452,10 +452,13 @@ section {
   line-height: 1.8;
   color: var(--text-muted);
   overflow-x: auto;
+  white-space: pre;
+  margin: 0;
 }
 
 .tree-block .dir { color: var(--accent); }
 .tree-block .file { color: var(--text); }
+.tree-block .comment { color: #6b7a94; }
 
 /* Footer */
 .footer {
