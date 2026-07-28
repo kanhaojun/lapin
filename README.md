@@ -1,5 +1,7 @@
 # Lapin
 
+[![GitHub Pages](https://img.shields.io/badge/docs-GitHub%20Pages-222?style=flat&logo=github)](https://kanhaojun.github.io/lapin/)
+
 Lapin is a research framework for **industrial image segmentation** with both **centralized** and **federated** training pipelines. It also includes a **mask-conditioned DDPM** module for synthesizing training data before segmentation. The unified codebase supports training, validation, and comparison of multiple segmentation architectures on industrial surface-defect datasets such as SD900 (Saliency900).
 
 ## Highlights

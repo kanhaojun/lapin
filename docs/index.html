@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lapin — A unified framework for industrial image segmentation with centralized & federated learning, plus mask-conditioned DDPM data synthesis.">
+  <meta name="keywords" content="industrial inspection, image segmentation, federated learning, DDPM, surface defect, PyTorch">
+  <meta property="og:title" content="Lapin — Industrial Image Segmentation Framework">
+  <meta property="og:description" content="Unified training for 13 segmentation models, federated learning across factory clients, and DDPM-based synthetic data augmentation.">
+  <meta property="og:type" content="website">
+  <title>Lapin — Industrial Image Segmentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">L</span>
+        Lapin
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features" class="lang-en">Features</a><a href="#features" class="lang-zh">特色</a></li>
+        <li><a href="#models" class="lang-en">Models</a><a href="#models" class="lang-zh">模型</a></li>
+        <li><a href="#pipeline" class="lang-en">Pipeline</a><a href="#pipeline" class="lang-zh">流程</a></li>
+        <li><a href="#quickstart" class="lang-en">Quick Start</a><a href="#quickstart" class="lang-zh">快速開始</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中文</button>
+        <a href="https://github.com/kanhaojun/lapin" class="btn btn-primary" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-badge lang-en">Industrial AI · Open Source</div>
+      <div class="hero-badge lang-zh">工業 AI · 開源框架</div>
+
+      <h1>
+        <span class="lang-en">Industrial Image<br>Segmentation, Unified</span>
+        <span class="lang-zh">工業影像分割<br>統一研究框架</span>
+      </h1>
+
+      <p class="hero-desc lang-en">
+        Lapin is a research framework for industrial surface-defect segmentation.
+        Train 13 architectures with centralized or federated pipelines,
+        and augment datasets with mask-conditioned DDPM synthesis — all in one codebase.
+      </p>
+      <p class="hero-desc lang-zh">
+        Lapin 是面向工業表面瑕疵分割的研究框架。
+        在統一程式碼庫中，支援 13 種分割架構的集中式與聯邦學習訓練，
+        並整合遮罩條件式 DDPM 合成資料擴增。
+      </p>
+
+      <div class="hero-cta">
+        <a href="https://github.com/kanhaojun/lapin" class="btn btn-primary" target="_blank" rel="noopener">
+          <span class="lang-en">View on GitHub</span>
+          <span class="lang-zh">前往 GitHub</span>
+        </a>
+        <a href="#quickstart" class="btn btn-ghost">
+          <span class="lang-en">Get Started</span>
+          <span class="lang-zh">快速開始</span>
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">13</div>
+          <div class="stat-label lang-en">Segmentation Models</div>
+          <div class="stat-label lang-zh">分割模型</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">3</div>
+          <div class="stat-label lang-en">FL Algorithms</div>
+          <div class="stat-label lang-zh">聯邦學習演算法</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">DDPM</div>
+          <div class="stat-label lang-en">Data Synthesis</div>
+          <div class="stat-label lang-zh">合成資料生成</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">SD900</div>
+          <div class="stat-label lang-en">Defect Dataset</div>
+          <div class="stat-label lang-zh">瑕疵資料集</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Features -->
+  <section id="features">
+    <div class="container">
+      <div class="section-label lang-en">Features</div>
+      <div class="section-label lang-zh">主要特色</div>
+      <h2 class="section-title lang-en">Everything you need for industrial segmentation research</h2>
+      <h2 class="section-title lang-zh">工業分割研究所需的一切</h2>
+      <p class="section-desc lang-en">
+        From single-factory centralized training to multi-site federated learning,
+        Lapin provides a modular, reproducible pipeline built on PyTorch.
+      </p>
+      <p class="section-desc lang-zh">
+        從單一工廠的集中式訓練到跨站點的聯邦學習，
+        Lapin 提供基於 PyTorch 的模組化、可重現研究流程。
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔬</div>
+          <h3 class="lang-en">13 Model Architectures</h3>
+          <h3 class="lang-zh">13 種分割架構</h3>
+          <p class="lang-en">UNet, VMUNet, HVMUNet, U²-Net, TransUNet, and more — unified training & evaluation interface.</p>
+          <p class="lang-zh">UNet、VMUNet、HVMUNet、U²-Net、TransUNet 等，統一訓練與評估介面。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏭</div>
+          <h3 class="lang-en">Federated Learning</h3>
+          <h3 class="lang-zh">聯邦學習</h3>
+          <p class="lang-en">Simulate multi-factory clients with FedAvg, FedProx, and SCAFFOLD. Supports IID and non-IID splits.</p>
+          <p class="lang-zh">以 FedAvg、FedProx、SCAFFOLD 模擬多工廠客戶端，支援 IID 與 non-IID 切分。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✨</div>
+          <h3 class="lang-en">DDPM Synthesis</h3>
+          <h3 class="lang-zh">DDPM 合成擴增</h3>
+          <p class="lang-en">Mask-conditioned diffusion model generates synthetic defect image-mask pairs to boost training data.</p>
+          <p class="lang-zh">遮罩條件式擴散模型生成合成瑕疵影像-遮罩對，擴增訓練資料。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3 class="lang-en">Standard Metrics</h3>
+          <h3 class="lang-zh">標準評估指標</h3>
+          <p class="lang-en">IoU, Dice, Accuracy, Sensitivity, and Specificity computed from confusion matrix.</p>
+          <p class="lang-zh">IoU、Dice、Accuracy、Sensitivity、Specificity，由混淆矩陣計算。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3 class="lang-en">Experiment Tracking</h3>
+          <h3 class="lang-zh">實驗追蹤</h3>
+          <p class="lang-en">TensorBoard logging built-in. Optional Weights & Biases integration for team collaboration.</p>
+          <p class="lang-zh">內建 TensorBoard 紀錄，可選用 Weights & Biases 團隊協作。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚙️</div>
+          <h3 class="lang-en">Modular Config</h3>
+          <h3 class="lang-zh">模組化設定</h3>
+          <p class="lang-en">Swap models, datasets, and optimizers independently via configs/config.py.</p>
+          <p class="lang-zh">透過 configs/config.py 獨立切換模型、資料集與優化器。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pipeline -->
+  <section id="pipeline">
+    <div class="container">
+      <div class="section-label lang-en">Workflow</div>
+      <div class="section-label lang-zh">工作流程</div>
+      <h2 class="section-title lang-en">End-to-end research pipeline</h2>
+      <h2 class="section-title lang-zh">端到端研究流程</h2>
+      <p class="section-desc lang-en">Generate synthetic data, merge with real defects, then train and compare segmentation models.</p>
+      <p class="section-desc lang-zh">生成合成資料、合併真實瑕疵樣本，再訓練並比較分割模型。</p>
+
+      <div class="pipeline">
+        <div class="pipeline-step lang-en">Real Surface<br>Images + Masks</div>
+        <div class="pipeline-step lang-zh">真實表面<br>影像 + 遮罩</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step">generation.train<br><small style="color:var(--text-muted)">DDPM</small></div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step lang-en">Synthetic<br>Image-Mask Pairs</div>
+        <div class="pipeline-step lang-zh">合成<br>影像-遮罩對</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step lang-en">Merge into<br>data/</div>
+        <div class="pipeline-step lang-zh">合併至<br>data/</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step">train.py<br>train_federated.py</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step lang-en">Segmentation<br>Results</div>
+        <div class="pipeline-step lang-zh">分割<br>結果</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Models -->
+  <section id="models">
+    <div class="container">
+      <div class="section-label lang-en">Models</div>
+      <div class="section-label lang-zh">支援模型</div>
+      <h2 class="section-title lang-en">13 segmentation architectures</h2>
+      <h2 class="section-title lang-zh">13 種分割架構</h2>
+      <p class="section-desc lang-en">Select any model via <code>--model</code> flag. All share the same training loop and metrics.</p>
+      <p class="section-desc lang-zh">透過 <code>--model</code> 參數選擇，共用相同訓練迴圈與評估指標。</p>
+
+      <div class="models-grid">
+        <div class="model-chip"><span>UNet</span><code>unet</code></div>
+        <div class="model-chip"><span>VMUNet</span><code>vmunet</code></div>
+        <div class="model-chip"><span>VMUNet V2</span><code>vmunet-v2</code></div>
+        <div class="model-chip"><span>HVMUNet</span><code>hvmunet</code></div>
+        <div class="model-chip"><span>U²-Net</span><code>u2net</code></div>
+        <div class="model-chip"><span>UNet++</span><code>unetpp</code></div>
+        <div class="model-chip"><span>UNet+++</span><code>unetppp</code></div>
+        <div class="model-chip"><span>TransUNet</span><code>tunet</code></div>
+        <div class="model-chip"><span>ResUNet</span><code>resunet</code></div>
+        <div class="model-chip"><span>ResUNet++</span><code>resunetpp</code></div>
+        <div class="model-chip"><span>Att UNet</span><code>attu</code></div>
+        <div class="model-chip"><span>R2U-Net</span><code>r2u</code></div>
+        <div class="model-chip"><span>R2AttU-Net</span><code>attr2u</code></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Start -->
+  <section id="quickstart">
+    <div class="container">
+      <div class="section-label lang-en">Quick Start</div>
+      <div class="section-label lang-zh">快速開始</div>
+      <h2 class="section-title lang-en">Get up and running in minutes</h2>
+      <h2 class="section-title lang-zh">數分鐘內開始使用</h2>
+
+      <div class="two-col">
+        <div>
+          <h3 style="margin-bottom:16px;font-size:1.05rem;" class="lang-en">Installation</h3>
+          <h3 style="margin-bottom:16px;font-size:1.05rem;" class="lang-zh">環境安裝</h3>
+          <div class="code-block">
+            <div class="code-header">bash</div>
+            <pre><span class="cmd">git clone</span> https://github.com/kanhaojun/lapin.git
+<span class="cmd">cd</span> lapin
+<span class="cmd">conda create -n</span> lapin python=3.8
+<span class="cmd">conda activate</span> lapin
+<span class="cmd">pip install -r</span> requirements.txt</pre>
+          </div>
+
+          <h3 style="margin-bottom:16px;font-size:1.05rem;" class="lang-en">Centralized Training</h3>
+          <h3 style="margin-bottom:16px;font-size:1.05rem;" class="lang-zh">集中式訓練</h3>
+          <div class="code-block">
+            <div class="code-header">bash</div>
+            <pre><span class="cmd">python</span> train.py \
+  <span class="flag">--model</span> unet \
+  <span class="flag">--dataset</span> sd900 \
+  <span class="flag">--gpu</span> 0 \
+  <span class="flag">--epochs</span> 300</pre>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="margin-bottom:16px;font-size:1.05rem;" class="lang-en">Federated Training</h3>
+          <h3 style="margin-bottom:16px;font-size:1.05rem;" class="lang-zh">聯邦學習訓練</h3>
+          <div class="code-block">
+            <div class="code-header">bash</div>
+            <pre><span class="cmd">python</span> train_federated.py \
+  <span class="flag">--model</span> unet \
+  <span class="flag">--dataset</span> sd900combine \
+  <span class="flag">--method</span> scaffold \
+  <span class="flag">--num-clients</span> 23 \
+  <span class="flag">--gpu</span> 0</pre>
+          </div>
+
+          <h3 style="margin-bottom:16px;font-size:1.05rem;" class="lang-en">DDPM Data Synthesis</h3>
+          <h3 style="margin-bottom:16px;font-size:1.05rem;" class="lang-zh">DDPM 合成資料</h3>
+          <div class="code-block">
+            <div class="code-header">bash</div>
+            <pre><span class="comment"># Train DDPM</span>
+<span class="cmd">python -m</span> generation.train \
+  <span class="flag">--run-name</span> sd900_ddpm \
+  <span class="flag">--image-path</span> data/sd900_gen/images \
+  <span class="flag">--mask-path</span> data/sd900_gen/masks \
+  <span class="flag">--gpu</span> 0
+
+<span class="comment"># Sample synthetic pairs</span>
+<span class="cmd">python -m</span> generation.sample \
+  <span class="flag">--run-name</span> sd900_ddpm \
+  <span class="flag">--output</span> data/synthetic/sd900_ddpm \
+  <span class="flag">--gpu</span> 0</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin: 48px 0 16px; font-size:1.05rem;" class="lang-en">Project Structure</h3>
+      <h3 style="margin: 48px 0 16px; font-size:1.05rem;" class="lang-zh">專案結構</h3>
+      <div class="tree-block">
+<span class="dir">lapin/</span>
+├── <span class="file">train.py</span>                 <span class="comment lang-en"># Centralized segmentation training</span><span class="comment lang-zh"># 集中式分割訓練</span>
+├── <span class="file">train_federated.py</span>       <span class="comment lang-en"># Federated segmentation training</span><span class="comment lang-zh"># 聯邦分割訓練</span>
+├── <span class="dir">generation/</span>              <span class="comment lang-en"># Mask-conditioned DDPM synthesis</span><span class="comment lang-zh"># 遮罩條件式 DDPM</span>
+│   ├── <span class="file">train.py</span>
+│   ├── <span class="file">sample.py</span>
+│   └── <span class="file">eval_fid.py</span>
+├── <span class="file">engine.py</span>                <span class="comment lang-en"># Training / validation loops</span><span class="comment lang-zh"># 訓練 / 驗證迴圈</span>
+├── <span class="dir">models/</span>                  <span class="comment lang-en"># 13 segmentation architectures</span><span class="comment lang-zh"># 13 種分割模型</span>
+├── <span class="dir">federated/</span>               <span class="comment lang-en"># FL data split & SCAFFOLD</span><span class="comment lang-zh"># 聯邦切分與 SCAFFOLD</span>
+├── <span class="dir">data/</span>                    <span class="comment lang-en"># SD900 dataset (user-provided)</span><span class="comment lang-zh"># SD900 資料集</span>
+└── <span class="dir">results/</span>                 <span class="comment lang-en"># Experiment outputs</span><span class="comment lang-zh"># 實驗輸出</span>
+      </div>
+
+      <h3 style="margin: 48px 0 16px; font-size:1.05rem;" class="lang-en">Evaluation Metrics</h3>
+      <h3 style="margin: 48px 0 16px; font-size:1.05rem;" class="lang-zh">評估指標</h3>
+      <div class="metrics-row">
+        <span class="metric-tag">IoU</span>
+        <span class="metric-tag">Dice</span>
+        <span class="metric-tag">Accuracy</span>
+        <span class="metric-tag">Sensitivity</span>
+        <span class="metric-tag">Specificity</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="https://github.com/kanhaojun/lapin" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/kanhaojun/lapin/blob/main/README.md" target="_blank" rel="noopener">README</a>
+        <a href="https://github.com/kanhaojun/lapin/blob/main/README_zh-TW.md" target="_blank" rel="noopener">繁體中文文件</a>
+        <a href="https://github.com/kanhaojun/lapin/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+      </div>
+      <p>Lapin — A Unified Framework for Industrial Image Segmentation</p>
+      <p style="margin-top:8px;font-size:0.8rem;">Built with PyTorch · FedAvg · FedProx · SCAFFOLD · DDPM</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

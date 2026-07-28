@@ -1,5 +1,7 @@
 # Lapin
 
+[![GitHub Pages](https://img.shields.io/badge/docs-GitHub%20Pages-222?style=flat&logo=github)](https://kanhaojun.github.io/lapin/)
+
 Lapin 是一個用於**工業影像分割**的研究框架，同時支援**集中式訓練**與**聯邦學習（Federated Learning）**。此外，本專案包含**遮罩條件式 DDPM** 模組，可在分割前先以生成模型合成大量訓練資料。統一的程式碼結構可在 SD900（Saliency900）等工業表面瑕疵資料集上，訓練、驗證並比較多種分割模型。
 
 ## 主要特色
