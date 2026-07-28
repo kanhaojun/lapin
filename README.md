@@ -177,17 +177,4 @@ This project builds upon open-source implementations of UNet variants, Vision Ma
 
 See [LICENSE](LICENSE).
 
-## Citation
-
-If you use Lapin in your research, please cite:
-
-```bibtex
-@software{lapin2026,
-  title  = {Lapin: A Unified Framework for Medical Image Segmentation},
-  author = {Your Name},
-  year   = {2026},
-  url    = {https://github.com/your-org/lapin}
-}
-```
-
 For the Traditional Chinese documentation, see [README_zh-TW.md](README_zh-TW.md).
